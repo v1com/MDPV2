@@ -1,13 +1,14 @@
 #ifndef DIAGRAM_H
 #define DIAGRAM_H
-
+#include <qobject.h>
 #include <iostream>
 
 using namespace std;
 
 template <class T>
-class Diagram
+class Diagram:public QObject
 {
+    Q_OBJECT
 public:
     Diagram ();
     ~Diagram();
