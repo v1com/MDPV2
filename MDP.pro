@@ -43,7 +43,8 @@ HEADERS  += maindialog.h \
     shapes/entrance.h \
     shapes/exit.h \
     shapes/ifblock.h \
-    shapes/shape.h
+    shapes/shape.h \
+    diagram.h
 
 FORMS    += maindialog.ui \
     creatediagramwindow.ui
