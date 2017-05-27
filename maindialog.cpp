@@ -17,5 +17,5 @@ void MainDialog::on_createDiagramBtn_clicked()
 {
     CreateDiagramWindow *cdw = new CreateDiagramWindow();
     cdw->show();
-    this->destroy();
+    this->close();
 }
