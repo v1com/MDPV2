@@ -2,11 +2,14 @@
 #define ARROW_H
 #include <QGraphicsItem>
 #include <QPoint>
-#include "shapetype.h"
+#include "arrowdirection.h"
+#include "shape.h"
 
 class Arrow : public QGraphicsItem {
 public:
-    Arrow(QPoint fromPoint, QPoint toPoint, ShapeType shapeType);
+    Arrow(QPoint fromPoint, QPoint toPoint, ArrowDirection arrowDirection);
+
+    //Arrow(Shape *fromShape, Shape *toShape);
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;

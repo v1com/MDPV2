@@ -43,7 +43,7 @@ void Bar::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 }
 
 
-QPoint Bar::getPointForOutArrow()
+QPoint Bar::getBottomPoint()
 {
     if (isFirstOutArrow) {
         isFirstOutArrow = false;
@@ -57,7 +57,7 @@ QPoint Bar::getPointForOutArrow()
     }
 }
 
-QPoint Bar::getPointForInArrow()
+QPoint Bar::getUpperPoint()
 {
     if (isFirstInArrow) {
         isFirstInArrow = false;
@@ -70,4 +70,14 @@ QPoint Bar::getPointForInArrow()
         return QPoint(myX + myWidth - 50, myY);
     }
 
+}
+
+QPoint Bar::getLeftPoint()
+{
+    return QPoint(myX, myY + myHeight / 2);
+}
+
+QPoint Bar::getRightPoint()
+{
+    return QPoint(myX + myWidth, myY + myHeight / 2);
 }

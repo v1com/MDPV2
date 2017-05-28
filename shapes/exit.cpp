@@ -34,13 +34,23 @@ QRectF Exit::boundingRect() const
     return QRectF(myX - myWidth / 2, myY - myHeight / 2, outerD, outerD);
 }
 
-QPoint Exit::getPointForOutArrow()
+QPoint Exit::getBottomPoint()
 {
     return QPoint(myX, myY + myHeight / 2);
 }
 
-QPoint Exit::getPointForInArrow()
+QPoint Exit::getUpperPoint()
 {
     return QPoint(myX, myY - myHeight / 2);
+}
+
+QPoint Exit::getLeftPoint()
+{
+    return QPoint(myX - myWidth / 2, myY);
+}
+
+QPoint Exit::getRightPoint()
+{
+    return QPoint(myX + myWidth / 2, myY);
 }
 

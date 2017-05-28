@@ -49,7 +49,8 @@ HEADERS  += maindialog.h \
     scene.h \
     view.h \
     shapes/shapetype.h \
-    creatediagramform.h
+    creatediagramform.h \
+    shapes/arrowdirection.h
 
 FORMS    += maindialog.ui \
     creatediagramform.ui

@@ -8,10 +8,10 @@ public:
     IfBlock(int x, int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
-    QPoint getPointForOutArrow();
-    QPoint getPointForInArrow();
-
-
+    QPoint getBottomPoint();
+    QPoint getUpperPoint();
+    QPoint getRightPoint();
+    QPoint getLeftPoint();
 private:
     bool isFirstArrow = true;
 };

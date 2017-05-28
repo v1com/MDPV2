@@ -32,12 +32,22 @@ QRectF Block::boundingRect() const
     return QRectF(myX - myWidth / 2, myY - myHeight / 2, myWidth, myHeight);
 }
 
-QPoint Block::getPointForOutArrow()
+QPoint Block::getBottomPoint()
 {
     return QPoint(myX, myY + myHeight / 2);
 }
 
-QPoint Block::getPointForInArrow()
+QPoint Block::getUpperPoint()
 {
     return QPoint(myX, myY - myHeight / 2);
+}
+
+QPoint Block::getLeftPoint()
+{
+    return QPoint(myX - myWidth / 2, myY);
+}
+
+QPoint Block::getRightPoint()
+{
+    return QPoint(myX + myWidth / 2, myY);
 }

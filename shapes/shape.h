@@ -21,8 +21,12 @@ public:
     int getWidth();
     int getHeight();
     QPoint getCoords();
-    virtual QPoint getPointForOutArrow() = 0;
-    virtual QPoint getPointForInArrow() = 0;
+
+    virtual QPoint getBottomPoint() = 0;
+    virtual QPoint getUpperPoint() = 0;
+    virtual QPoint getRightPoint() = 0;
+    virtual QPoint getLeftPoint() = 0;
+
     bool isDefault;
     int getMyX();
     int getMyY();

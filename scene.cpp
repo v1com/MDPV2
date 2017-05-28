@@ -51,7 +51,8 @@ Scene::Scene(int i, Scene *tmpScene) : i(i)
         Entrance *entr = new Entrance(50, 200);
         addItem(entr);
 
-        Arrow *arrow = new Arrow(block->getPointForOutArrow(), entr->getPointForInArrow(), block->getType());
+       // Arrow *arrow = new Arrow(block->getBottomPoint(), entr->getUpperPoint(), block->getType());
+        Arrow *arrow = new Arrow(entr->getRightPoint(), block->getUpperPoint(), FromLRtoUpDirection);
         addItem(arrow);
     }
 }

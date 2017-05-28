@@ -11,8 +11,10 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-    QPoint getPointForOutArrow();
-    QPoint getPointForInArrow();
+    QPoint getBottomPoint();
+    QPoint getUpperPoint();
+    QPoint getRightPoint();
+    QPoint getLeftPoint();
 
 private:
     bool isFirstOutArrow = true;

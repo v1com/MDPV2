@@ -39,18 +39,22 @@ QRectF IfBlock::boundingRect() const
 }
 
 
-QPoint IfBlock::getPointForOutArrow()
+QPoint IfBlock::getBottomPoint()
 {
-    if (isFirstArrow){
-        isFirstArrow = false;
-        return QPoint(myX - myWidth / 2, myY);
-    }
-    else {
-        return QPoint(myX + myWidth / 2, myY);
-    }
+   return QPoint(myX, myY + myHeight / 2);
 }
 
-QPoint IfBlock::getPointForInArrow()
+QPoint IfBlock::getUpperPoint()
 {
     return QPoint(myX, myY - myHeight / 2);
+}
+
+QPoint IfBlock::getLeftPoint()
+{
+    return QPoint(myX - myWidth / 2, myY);
+}
+
+QPoint IfBlock::getRightPoint()
+{
+    return QPoint(myX + myWidth / 2, myY);
 }
