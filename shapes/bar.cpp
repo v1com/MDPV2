@@ -81,3 +81,7 @@ QPoint Bar::getRightPoint()
 {
     return QPoint(myX + myWidth, myY + myHeight / 2);
 }
+
+QPoint Bar::getOutPoint() {
+    return getBottomPoint();
+}

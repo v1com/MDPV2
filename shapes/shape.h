@@ -27,6 +27,8 @@ public:
     virtual QPoint getRightPoint() = 0;
     virtual QPoint getLeftPoint() = 0;
 
+    virtual QPoint getOutPoint() = 0;
+
     bool isDefault;
     int getMyX();
     int getMyY();

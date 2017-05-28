@@ -51,3 +51,7 @@ QPoint Block::getRightPoint()
 {
     return QPoint(myX + myWidth / 2, myY);
 }
+
+QPoint Block::getOutPoint() {
+    return getBottomPoint();
+}

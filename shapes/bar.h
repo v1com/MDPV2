@@ -16,6 +16,8 @@ public:
     QPoint getRightPoint();
     QPoint getLeftPoint();
 
+    QPoint getOutPoint();
+
 private:
     bool isFirstOutArrow = true;
     bool isFirstInArrow = true;

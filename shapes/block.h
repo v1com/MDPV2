@@ -12,6 +12,8 @@ public:
     QPoint getUpperPoint();
     QPoint getRightPoint();
     QPoint getLeftPoint();
+
+    QPoint getOutPoint();
 };
 
 #endif // Block_H

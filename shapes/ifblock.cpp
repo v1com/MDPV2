@@ -54,6 +54,16 @@ QPoint IfBlock::getLeftPoint()
     return QPoint(myX - myWidth / 2, myY);
 }
 
+QPoint IfBlock::getOutPoint()
+{
+    if (isFirstArrow){
+        isFirstArrow = false;
+        return getLeftPoint();
+    }
+    else
+        return getRightPoint();
+}
+
 QPoint IfBlock::getRightPoint()
 {
     return QPoint(myX + myWidth / 2, myY);

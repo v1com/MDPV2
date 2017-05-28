@@ -44,6 +44,10 @@ Arrow::Arrow(QPoint fromPoint, QPoint toPoint, ArrowDirection arrowDirection) {
 }
 
 //Arrow::Arrow(Shape *fromShape, Shape *toShape){
+//    if (fromShape->getType() == IfBlockType) {
+//        from = fromShape
+//    }
+
 //    if (from.y() > to.y()) {
 //        from = fromShape->getBottomPoint();
 //        to = toShape->getUpperPoint();

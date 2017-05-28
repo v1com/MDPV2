@@ -13,6 +13,8 @@ public:
     QPoint getRightPoint();
     QPoint getLeftPoint();
 
+    QPoint getOutPoint();
+
 };
 
 #endif // ENTRANCE_H

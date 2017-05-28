@@ -13,6 +13,8 @@ public:
     QPoint getRightPoint();
     QPoint getLeftPoint();
 
+    QPoint getOutPoint();
+
 private:
     const int innerD = 15;
     const int outerD = 25;
