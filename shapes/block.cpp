@@ -1,11 +1,5 @@
 #include "block.h"
-#include <QWidget>
-#include <QPainter>
-#include <QDebug>
-#include <QByteArray>
-#include <QGraphicsSceneDragDropEvent>
-#include <QMimeData>
-#include <QDrag>
+
 
 Block::Block(int x, int y, int w, int h)
 {

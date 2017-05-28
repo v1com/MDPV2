@@ -1,7 +1,6 @@
 #ifndef ENTRANCE_H
 #define ENTRANCE_H
 #include "shape.h"
-#include "arrow.h"
 
 class Entrance : public Shape
 {

@@ -1,6 +1,5 @@
 #ifndef IFBLOCK_H
 #define IFBLOCK_H
-#include "arrow.h"
 #include "shape.h"
 
 class IfBlock : public Shape

@@ -3,7 +3,10 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsView>
-#include "arrowposition.h"
+#include <QWidget>
+#include <QtWidgets>
+#include <QPainter>
+#include <QDebug>
 #include "scene.h"
 #include "shapetype.h"
 
@@ -36,7 +39,6 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    void dropEvent(QGraphicsSceneDragDropEvent * event) override;
 };
 
 #endif // SHAPE_H

@@ -1,7 +1,7 @@
 #ifndef BAR_H
 #define BAR_H
 #include "shape.h"
-#include "arrow.h"
+
 
 class Bar : public Shape
 {

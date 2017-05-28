@@ -1,7 +1,5 @@
 #include "arrow.h"
 #include "shape.h"
-#include <QtWidgets>
-#include <QDrag>
 
 Shape::Shape()
 {
@@ -61,20 +59,7 @@ void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (QLineF(event->screenPos(), event->buttonDownScreenPos(Qt::LeftButton))
-        .length() < QApplication::startDragDistance()) {
-        return;
-    }
 
-    QDrag *drag = new QDrag(event->widget());
-    QMimeData *mime = new QMimeData;
-    drag->setMimeData(mime);
-
-    mime->setColorData(QRectF(-15.5, -15.5, 34, 34));
-    mime->setText("Data");
-
-
-   // drag->exec();
 }
 
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -91,20 +76,4 @@ void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 }
 
-void Shape::dropEvent(QGraphicsSceneDragDropEvent *event)
-{
-    //Add arrow
-    qDebug() << "shape drop event";
-
-    QByteArray byteArray = event->mimeData()->data("Item");
-    QByteArray *newArray = new QByteArray();
-    newArray->append(byteArray.data());
-    Shape *shape = *reinterpret_cast<Shape**>(byteArray.data());
-
-    if(isDefault) {
-        return;
-    }
-
-    qDebug() << "shape drop event x = " << shape->getCoords().x() << " y = " << shape->getCoords().y();
-}
 

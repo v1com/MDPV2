@@ -34,8 +34,7 @@ SOURCES += main.cpp\
     shapes/shape.cpp \
     scene.cpp \
     view.cpp \
-    creatediagramwindow.cpp \
-    arrowposition.cpp
+    creatediagramwindow.cpp
 
 HEADERS  += maindialog.h \
     allocator/allocator.h \
@@ -50,8 +49,7 @@ HEADERS  += maindialog.h \
     scene.h \
     view.h \
     shapes/shapetype.h \
-    creatediagramwindow.h \
-    arrowposition.h
+    creatediagramwindow.h
 
 FORMS    += maindialog.ui \
     creatediagramwindow.ui

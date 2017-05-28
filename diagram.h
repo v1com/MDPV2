@@ -5,24 +5,38 @@
 
 using namespace std;
 
+class DiagramSignalsSlots : public QObject
+ {
+     Q_OBJECT
+
+ public:
+     explicit DiagramSignalsSlots(QObject *parent = 0) :
+         QObject(parent) {}
+
+ public slots:
+ signals:
+
+ };
+
 template <class T>
-class Diagram:public QObject
+class Diagram : public DiagramSignalsSlots
 {
-    Q_OBJECT
 public:
     Diagram ();
     ~Diagram();
     void show();
     void addLink(T *firstEl, T *secondEl);
     void addElement (T *element);
-
+    void deleteEl(T *element);
 
 private:
      vector <list <T*>> vertexes;
 };
+
 template <class T>
 Diagram<T>::Diagram(){
 }
+
 template <class T>
 void Diagram<T>::show(){
     int size = vertexes.size();

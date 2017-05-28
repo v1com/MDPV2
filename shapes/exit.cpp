@@ -1,11 +1,4 @@
 #include "exit.h"
-#include <QWidget>
-#include <QPainter>
-#include <QDebug>
-#include <QByteArray>
-#include <QGraphicsSceneDragDropEvent>
-#include <QMimeData>
-#include <QDrag>
 
 Exit::Exit(int x, int y)
 {

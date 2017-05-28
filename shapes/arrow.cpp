@@ -1,27 +1,18 @@
 #include "shapes/arrow.h"
 #include <QPainter>
 
-Arrow::Arrow() {
-
-}
-
-Arrow::Arrow(ArrowPosition *fromPos, ArrowPosition *toPos)
-{
-    if (fromPos->fromPosition.y() > toPos->toPosition.y()){
-        this->toPos = fromPos;
-        this->fromPos = toPos;
-        to = fromPos->toPosition;
-        from = toPos->fromPosition;
+Arrow::Arrow(QPoint fromPoint, QPoint toPoint, ShapeType shapeType) {
+    if (fromPoint.y() >= toPoint.y()) {
+        this->to = fromPoint;
+        this->from = toPoint;
     }
     else {
-        this->fromPos = fromPos;
-        this->toPos = toPos;
-        from = fromPos->fromPosition;
-        to = toPos->toPosition;
+        this->from = fromPoint;
+        this->to = toPoint;
     }
 
     //if from_shape is IfBlock
-    if (this->fromPos->shapeType == IfBlockType){
+    if (shapeType == IfBlockType){
         if (from.y() == to.y()) {
             lines.push_back(QLine(from, to));
         }
@@ -47,21 +38,12 @@ Arrow::Arrow(ArrowPosition *fromPos, ArrowPosition *toPos)
     points[2] = QPoint(to.x() + 5, to.y() - 5);
 }
 
-
-void Arrow::updateFrom(ArrowPosition *fromPos) {
-    from = fromPos->fromPosition;
+void Arrow::updateFrom(QPoint fromPoint) {
+    from = fromPoint;
 }
 
-void Arrow::updateTo(ArrowPosition *toPos) {
-    to = toPos->toPosition;
-}
-
-ArrowPosition *Arrow::getFromPos() {
-    return this->fromPos;
-}
-
-ArrowPosition *Arrow::getToPos() {
-   return this->toPos;
+void Arrow::updateTo(QPoint toPoint) {
+    to = toPoint;
 }
 
 QPoint Arrow::getFrom() {

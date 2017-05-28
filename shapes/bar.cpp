@@ -1,12 +1,4 @@
 #include "bar.h"
-#include <QWidget>
-#include <QtWidgets>
-#include <QPainter>
-#include <QDebug>
-#include <QByteArray>
-#include <QGraphicsSceneDragDropEvent>
-#include <QMimeData>
-#include <QDrag>
 
 Bar::Bar(int x, int y)
 {

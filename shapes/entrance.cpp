@@ -1,11 +1,4 @@
 #include "entrance.h"
-#include <QWidget>
-#include <QPainter>
-#include <QDebug>
-#include <QByteArray>
-#include <QGraphicsSceneDragDropEvent>
-#include <QMimeData>
-#include <QDrag>
 
 Entrance::Entrance(int x, int y)
 {
