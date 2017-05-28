@@ -15,6 +15,7 @@ public:
 
     void updateFrom(QPoint fromPoint);
     void updateTo(QPoint toPoint);
+
 private:
     QPoint from;
     QPoint to;

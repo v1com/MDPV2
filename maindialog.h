@@ -2,7 +2,7 @@
 #define MAINDIALOG_H
 
 #include <QDialog>
-#include "creatediagramwindow.h"
+#include "creatediagramform.h"
 
 namespace Ui {
 class MainDialog;

@@ -44,6 +44,16 @@ Scene::Scene(int i, Scene *tmpScene) : i(i)
 
         //---------------------------------------------
     }
+    else {
+        Block *block = new Block(100, 120, 100, 50);
+        addItem(block);
+
+        Entrance *entr = new Entrance(50, 200);
+        addItem(entr);
+
+        Arrow *arrow = new Arrow(block->getPointForOutArrow(), entr->getPointForInArrow(), block->getType());
+        addItem(arrow);
+    }
 }
 
 //void Scene::dragEnterEvent ( QGraphicsSceneDragDropEvent * event )

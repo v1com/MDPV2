@@ -1,13 +1,13 @@
-#include "creatediagramwindow.h"
-#include "ui_creatediagramwindow.h"
+#include "creatediagramform.h"
+#include "ui_creatediagramform.h"
 #include "scene.h"
 #include "view.h"
 #include <QSplitter>
 #include <QHBoxLayout>
 
-CreateDiagramWindow::CreateDiagramWindow(QWidget *parent) :
+CreateDiagramForm::CreateDiagramForm(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::CreateDiagramWindow)
+    ui(new Ui::CreateDiagramForm)
 {
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Horizontal);
@@ -34,7 +34,7 @@ CreateDiagramWindow::CreateDiagramWindow(QWidget *parent) :
     setLayout(layout);
 }
 
-CreateDiagramWindow::~CreateDiagramWindow()
+CreateDiagramForm::~CreateDiagramForm()
 {
     delete ui;
 }
