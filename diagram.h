@@ -1,6 +1,6 @@
 #ifndef DIAGRAM_H
 #define DIAGRAM_H
-#include <qobject.h>
+#include <QObject>
 #include <iostream>
 
 using namespace std;
@@ -42,8 +42,8 @@ void Diagram<T>::show(){
     int size = vertexes.size();
     list <T*> mylist;
     list <T*> tempList;
-    list<T*>::iterator it;
-    list<T*>::iterator temp;
+    typename list<T*>::iterator it;
+    typename list<T*>::iterator temp;
 
     for(int i = 0; i != size; i++){
         mylist = vertexes[i];
@@ -62,13 +62,11 @@ void Diagram<T>::show(){
     }
 }
 
-
-
 template <class T>
 Diagram<T>::~Diagram(){
 
     list <T*> mylist;
-    list<T*>::iterator it;
+    typename list<T*>::iterator it;
 
     int size = vertexes.size();
     for(int i = 0; i != size; i++){
@@ -93,7 +91,7 @@ void Diagram<T>::addLink(T *firstEl, T *secondEl)
 {
     list <T*> tempList;
     tempList.push_back(firstEl);
-    list <T*>::iterator temp = tempList.begin();
+    typename list <T*>::iterator temp = tempList.begin();
     int size = vertexes.size();
     for(int i = 0; i != size; i++){
         T *searchEl = vertexes[i].front();
@@ -106,7 +104,7 @@ template <class T>
 void Diagram<T>::deleteEl(T *element)
 {
     list <T*> mylist;
-    list<T*>::iterator it;
+    typename list<T*>::iterator it;
 
     int size = vertexes.size();
     for(int i = 0; i != size; i++){

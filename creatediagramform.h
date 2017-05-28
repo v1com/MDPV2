@@ -1,6 +1,8 @@
 #ifndef CREATEDIAGRAMFORM_H
 #define CREATEDIAGRAMFORM_H
 
+#include "Scene.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -15,7 +17,23 @@ public:
     explicit CreateDiagramForm(QWidget *parent = 0);
     ~CreateDiagramForm();
 
+private slots:
+    void on_blockButton_clicked();
+
+    void on_ifBlockButton_clicked();
+
+    void on_endBlockButton_clicked();
+
+    void on_barButton_clicked();
+
+    void on_startBlockButton_clicked();
+
+    void on_clearSceneButton_clicked();
+
 private:
+    Scene *myScene;
+    int sceneCenterX;
+    int sceneCenterY;
     Ui::CreateDiagramForm *ui;
 };
 
