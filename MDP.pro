@@ -33,7 +33,6 @@ SOURCES += main.cpp\
     shapes/ifblock.cpp \
     shapes/shape.cpp \
     scene.cpp \
-    view.cpp \
     creatediagramform.cpp
 
 HEADERS  += maindialog.h \
@@ -47,7 +46,6 @@ HEADERS  += maindialog.h \
     shapes/shape.h \
     diagram.h \
     scene.h \
-    view.h \
     shapes/shapetype.h \
     creatediagramform.h
 

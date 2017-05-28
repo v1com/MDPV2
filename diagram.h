@@ -62,8 +62,6 @@ void Diagram<T>::show(){
     }
 }
 
-
-
 template <class T>
 Diagram<T>::~Diagram(){
 
