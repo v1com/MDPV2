@@ -3,6 +3,7 @@
 #include <QObject>
 #include <iostream>
 
+
 using namespace std;
 
 class DiagramSignalsSlots : public QObject
@@ -28,6 +29,7 @@ public:
     void addLink(T *firstEl, T *secondEl);
     void addElement (T *element);
     void deleteEl(T *element);
+    typename vector<list<T*>> getVector() {return vertexes;}
 
 private:
      vector <list <T*>> vertexes;
