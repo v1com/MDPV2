@@ -5,17 +5,15 @@
 class Exit : public Shape
 {
 public:
-    Exit(Scene *tmpScene, int x, int y);
+    Exit(int x, int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    void addArrows(QGraphicsScene *scene);
     QRectF boundingRect() const override;
-    QPoint getArrowOut();
-    QPoint getArrowIn();
-protected:
-     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    QPoint getPointForOutArrow();
+    QPoint getPointForInArrow();
+
 private:
-    const int inner_d = 15;
-    const int outer_d = 25;
+    const int innerD = 15;
+    const int outerD = 25;
 };
 
 #endif // EXIT_H

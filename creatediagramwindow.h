@@ -2,13 +2,14 @@
 #define CREATEDIAGRAMWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
+#include <QtWidgets>
 
 namespace Ui {
 class CreateDiagramWindow;
 }
 
-class CreateDiagramWindow : public QMainWindow
-{
+class CreateDiagramWindow : public QWidget {
     Q_OBJECT
 
 public:

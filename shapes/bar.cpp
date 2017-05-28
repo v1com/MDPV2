@@ -8,24 +8,15 @@
 #include <QMimeData>
 #include <QDrag>
 
-Bar::Bar(Scene *tmpScene, int x, int y)
+Bar::Bar(int x, int y)
 {
-    myScene = tmpScene;
     this->myX = x;
     this->myY = y;
-    w = 100;
 
-    width = w;
-    height = h;
+    shapeType = BarType;
 
-    type = 3;
-
-    //Offset in order to the figures are not cut off
-    pixmap_w = w + 2;
-    pixmap_h = h + 2;
-
-    translate_x = - x + 1;
-    translate_y = - y + 1;
+    myWidth = 100;
+    myHeight = 5;
 
     setToolTip("Bar");
     setCursor(Qt::OpenHandCursor);
@@ -39,45 +30,14 @@ void Bar::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     painter->setPen(Qt::NoPen);
     painter->setPen(QPen(Qt::black, 1));
     painter->setBrush(* new QBrush(Qt::black));
-    painter->drawRect(myX, myY, w, h);
+    painter->drawRect(myX, myY, myWidth, myHeight);
 }
 
-void Bar::addArrows(QGraphicsScene *scene){
-    foreach (Arrow *arrow, arrows) {
-        scene->addItem(arrow);
-    }
-}
 
 QRectF Bar::boundingRect() const
 {
-    return QRectF(myX, myY, w, h);
+    return QRectF(myX, myY, myWidth, myHeight);
 }
-
-//void Bar::setWidth(QAction *action)
-//{
-//    auto myScene = scene();
-//    if (action->text() == "Add arrow") {
-//        w += 110;
-//        Arrow *last = arrows.back();
-//        arrows.push_back(new Arrow(QPoint(last->getFrom().x() + 110, myY + h),
-//                                   QPoint(last->getFrom().x() + 110, myY + h + 30)));
-
-//        myScene->addItem(arrows.back());
-//    }
-//    else if (action->text() == "Delete arrow") {
-//        if (arrows.size() > 2) {
-//            w -= 110;
-
-//            myScene->removeItem(arrows.back());
-//            arrows.pop_back();
-//        }
-//    }
-
-//    pixmap_w = w + 2;
-//    pixmap_h = h + 2;
-
-//    myScene->update();
-//}
 
 void Bar::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
@@ -90,50 +50,32 @@ void Bar::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
                      this, SLOT(setWidth(QAction *)));
 }
 
-void Bar::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+
+QPoint Bar::getPointForOutArrow()
 {
-    if(!isDefault) {
-        qDebug() << "Block::mouseDoubleClickEvent";
-        QMimeData * mimeData = new QMimeData;
-
-        Shape * item = this;
-        QByteArray byteArray(reinterpret_cast<char*>(&item),sizeof(Shape*));
-        mimeData->setData("Item",byteArray);
-
-        // start the event
-        QDrag * drag = new QDrag(event->widget());
-        drag->setMimeData(mimeData);
-        drag->exec();
-    } else {
-        myScene->addItem(new Bar(myScene, 200, 200));
-    }
-}
-
-QPoint Bar::getArrowOut()
-{
-    if (is_first_arrow) {
-        is_first_arrow = false;
-        return QPoint(myX + w / 2, myY + h);
+    if (isFirstOutArrow) {
+        isFirstOutArrow = false;
+        return QPoint(myX + myWidth / 2, myY + myHeight);
     }
     else {
         auto myScene = scene();
-        w += 110;
+        myWidth += 110;
         myScene->update();
-        return QPoint(myX + w - 50, myY + h);
+        return QPoint(myX + myWidth - 50, myY + myHeight);
     }
 }
 
-QPoint Bar::getArrowIn()
+QPoint Bar::getPointForInArrow()
 {
-    if (is_first_in_arrow) {
-        is_first_in_arrow = false;
-        return QPoint(myX + w / 2, myY);
+    if (isFirstInArrow) {
+        isFirstInArrow = false;
+        return QPoint(myX + myWidth / 2, myY);
     }
     else {
         auto myScene = scene();
-        w += 110;
+        myWidth += 110;
         myScene->update();
-        return QPoint(myX + w - 50, myY);
+        return QPoint(myX + myWidth - 50, myY);
     }
 
 }

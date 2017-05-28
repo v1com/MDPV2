@@ -25,17 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         maindialog.cpp \
-    creatediagramwindow.cpp \
     shapes/arrow.cpp \
     shapes/bar.cpp \
     shapes/block.cpp \
     shapes/entrance.cpp \
     shapes/exit.cpp \
     shapes/ifblock.cpp \
-    shapes/shape.cpp
+    shapes/shape.cpp \
+    scene.cpp \
+    view.cpp \
+    creatediagramwindow.cpp \
+    arrowposition.cpp
 
 HEADERS  += maindialog.h \
-    creatediagramwindow.h \
     allocator/allocator.h \
     shapes/arrow.h \
     shapes/bar.h \
@@ -44,7 +46,12 @@ HEADERS  += maindialog.h \
     shapes/exit.h \
     shapes/ifblock.h \
     shapes/shape.h \
-    diagram.h
+    diagram.h \
+    scene.h \
+    view.h \
+    shapes/shapetype.h \
+    creatediagramwindow.h \
+    arrowposition.h
 
 FORMS    += maindialog.ui \
     creatediagramwindow.ui

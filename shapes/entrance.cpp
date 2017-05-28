@@ -7,23 +7,15 @@
 #include <QMimeData>
 #include <QDrag>
 
-Entrance::Entrance(Scene *tmpScene, int x, int y)
+Entrance::Entrance(int x, int y)
 {
-    myScene = tmpScene;
     this->myX = x;
     this->myY = y;
 
-    width = w;
-    height = h;
+    myWidth = 15;
+    myHeight = 15;
 
-    type = 1;
-
-    //Offset in order to the figures are not cut off
-    pixmap_w = w + 2;
-    pixmap_h = h + 2;
-
-    translate_x = -x + 1;
-    translate_y = -y + 1;
+    shapeType = EntranceType;
 
     setToolTip("Entrance");
     setCursor(Qt::OpenHandCursor);
@@ -38,44 +30,22 @@ void Entrance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setPen(Qt::NoPen);
     painter->setPen(QPen(Qt::black, 1));
     painter->setBrush(* new QBrush(Qt::black));
-    painter->drawEllipse(myX, myY, w, h);
+    painter->drawEllipse(myX - myWidth / 2, myY - myHeight / 2, myWidth, myHeight);
 }
 
-void Entrance::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
-{
-    if(!isDefault) {
-        qDebug() << "Block::mouseDoubleClickEvent";
-        QMimeData * mimeData = new QMimeData;
-
-        Shape * item = this;
-        QByteArray byteArray(reinterpret_cast<char*>(&item),sizeof(Shape*));
-        mimeData->setData("Item",byteArray);
-
-        // start the event
-        QDrag * drag = new QDrag(event->widget());
-        drag->setMimeData(mimeData);
-        drag->exec();
-    } else {
-        myScene->addItem(new Entrance(myScene, 200, 200));
-    }
-}
-
-void Entrance::addArrows(QGraphicsScene *scene){
-    scene->addItem(arrow);
-}
 
 QRectF Entrance::boundingRect() const
 {
-    return QRectF(myX, myY, w, h);
+    return QRectF(myX - myWidth / 2, myY - myHeight / 2, myWidth, myHeight);
 }
 
-QPoint Entrance::getArrowOut()
+QPoint Entrance::getPointForOutArrow()
 {
-    return QPoint(myX + w / 2, myY + h);
+    return QPoint(myX, myY + myHeight / 2);
 }
 
-QPoint Entrance::getArrowIn()
+QPoint Entrance::getPointForInArrow()
 {
-    return QPoint(myX + w / 2, myY);
+    return QPoint(myX, myY - myHeight / 2);
 }
 

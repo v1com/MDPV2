@@ -6,18 +6,11 @@
 class Block : public Shape
 {
 public:
-    Block(Scene *tmpScene, int x, int y, int w, int h);
+    Block(int x, int y, int w, int h);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    void addArrows(QGraphicsScene *scene);
     QRectF boundingRect() const override;
-    QPoint getArrowOut();
-    QPoint getArrowIn();
-protected:
-     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
-private:
-    int h, w;
-
-    Arrow *arrow;
+    QPoint getPointForOutArrow();
+    QPoint getPointForInArrow();
 };
 
 #endif // Block_H

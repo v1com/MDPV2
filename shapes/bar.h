@@ -7,27 +7,16 @@ class Bar : public Shape
 {
     Q_OBJECT
 public:
-    Bar(Scene *tmpScene, int x, int y);
+    Bar(int x, int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    void addArrows(QGraphicsScene *scene);
     QRectF boundingRect() const override;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-    QPoint getArrowOut();
-    QPoint getArrowIn();
-
-//public slots:
-    //void setWidth(QAction *action);
-
-protected:
-     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    QPoint getPointForOutArrow();
+    QPoint getPointForInArrow();
 
 private:
-    int w;
-    const int h = 5;
-    bool is_first_arrow = true;
-    bool is_first_in_arrow = true;
-
-    std::list <Arrow *> arrows;
+    bool isFirstOutArrow = true;
+    bool isFirstInArrow = true;
 };
 
 #endif // BAR_H

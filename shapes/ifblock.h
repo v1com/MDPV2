@@ -6,22 +6,15 @@
 class IfBlock : public Shape
 {
 public:
-    IfBlock(Scene *tmpScene, int x, int y);
+    IfBlock(int x, int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    void addArrows(QGraphicsScene *scene);
     QRectF boundingRect() const override;
-    QPoint getArrowOut();
-    QPoint getArrowIn();
-protected:
-     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+    QPoint getPointForOutArrow();
+    QPoint getPointForInArrow();
 
 
 private:
-    const int w = 70;
-    const int h = 40;
-    bool is_first_arrow = true;
-
-    Arrow *left_arrow, *right_arrow;
+    bool isFirstArrow = true;
 };
 
 #endif // IFBLOCK_H
