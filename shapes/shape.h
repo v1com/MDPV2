@@ -29,7 +29,6 @@ public:
 
     virtual QPoint getOutPoint() = 0;
 
-    bool isDefault;
     int getMyX();
     int getMyY();
     void setMyX(int x);

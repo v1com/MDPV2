@@ -29,10 +29,10 @@ public:
     void addLink(T *firstEl, T *secondEl);
     void addElement (T *element);
     void deleteEl(T *element);
-    typename vector<list<T*>> getVector() {return vertexes;}
+    vector<list<T*>> getVector() { return vertexes; }
 
 private:
-     vector <list <T*>> vertexes;
+    vector <list <T*>> vertexes;
 };
 
 template <class T>
@@ -40,7 +40,7 @@ Diagram<T>::Diagram(){
 }
 
 template <class T>
-void Diagram<T>::show(){
+void Diagram<T>::show() {
     int size = vertexes.size();
     list <T*> mylist;
     list <T*> tempList;

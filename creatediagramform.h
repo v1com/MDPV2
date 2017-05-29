@@ -2,8 +2,11 @@
 #define CREATEDIAGRAMFORM_H
 
 #include "Scene.h"
+#include "diagram.h"
 
 #include <QWidget>
+
+#include <shapes/shape.h>
 
 namespace Ui {
 class CreateDiagramForm;
@@ -34,6 +37,7 @@ private:
     Scene *myScene;
     int sceneCenterX;
     int sceneCenterY;
+    Diagram<Shape> *shapeContainer;
     Ui::CreateDiagramForm *ui;
 };
 

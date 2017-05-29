@@ -3,8 +3,7 @@
 
 Shape::Shape()
 {
-    setAcceptDrops(true);
-    isDefault = false;
+
 }
 
 int Shape::getWidth()
@@ -46,33 +45,18 @@ ShapeType Shape::getType()
 
 void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    setCursor(Qt::ClosedHandCursor);
-
-    if(event->button() == Qt::RightButton)
-    {
-        qDebug() << "Shape::PressRightButton";
-    } else {
-        qDebug() << "Shape::PressLeftButton";
-    }
 
 }
 
 void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    myX = event->scenePos().x();
+    myY = event->scenePos().y();
+    this->scene()->update();
 }
 
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "Shape::mouseReleaseEvent";
-    setCursor(Qt::OpenHandCursor);
-
-    if(isDefault) {
-        return;
-    } else {
-        myX = event->scenePos().x();
-        myY = event->scenePos().y();
-    }
 
 }
 
