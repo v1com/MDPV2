@@ -31,17 +31,6 @@ QRectF Bar::boundingRect() const
     return QRectF(myX, myY, myWidth, myHeight);
 }
 
-void Bar::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
-{
-    QMenu *menu = new QMenu;
-    menu->addAction("Add arrow");
-    menu->addAction("Delete arrow");
-    menu->popup(event->screenPos());
-
-    QObject::connect(menu, SIGNAL(triggered(QAction *)),
-                     this, SLOT(setWidth(QAction *)));
-}
-
 
 QPoint Bar::getBottomPoint()
 {

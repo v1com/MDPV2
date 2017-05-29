@@ -7,6 +7,7 @@
 #include <QWidget>
 
 #include <shapes/shape.h>
+#include <shapes/arrow.h>
 
 namespace Ui {
 class CreateDiagramForm;
@@ -33,10 +34,14 @@ private slots:
 
     void on_clearSceneButton_clicked();
 
+    void addArrow(Shape *to);
+    void setArrowFrom(Shape *from);
+
 private:
     Scene *myScene;
     int sceneCenterX;
     int sceneCenterY;
+    Shape *arrowFrom = NULL;
     Diagram<Shape> *shapeContainer;
     Ui::CreateDiagramForm *ui;
 };

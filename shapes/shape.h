@@ -36,6 +36,13 @@ public:
 
     ShapeType getType();
 
+public slots:
+     void emitAddArrow();
+
+signals:
+     void addArrowSignal(Shape *fromShape);
+     void mouseClicked(Shape *toShape);
+
 protected:
     int myX, myY, myWidth, myHeight;
 
@@ -44,6 +51,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 };
 
 #endif // SHAPE_H

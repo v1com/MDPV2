@@ -10,7 +10,6 @@ public:
     Bar(int x, int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     QPoint getBottomPoint();
     QPoint getUpperPoint();
     QPoint getRightPoint();

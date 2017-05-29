@@ -43,9 +43,14 @@ ShapeType Shape::getType()
     return shapeType;
 }
 
+void Shape::emitAddArrow()
+{
+    emit addArrowSignal(this);
+}
+
 void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    emit mouseClicked(this);
 }
 
 void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -58,6 +63,16 @@ void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 
+}
+
+void Shape::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    QMenu *menu = new QMenu;
+    menu->addAction("Add arrow");
+    menu->popup(event->screenPos());
+
+    connect(menu, SIGNAL(triggered(QAction *)),
+                 this, SLOT(emitAddArrow()));
 }
 
 

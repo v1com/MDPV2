@@ -8,9 +8,7 @@
 #include <shapes/exit.h>
 #include <shapes/ifblock.h>
 
-#include <shapes/shape.h>
 #include <diagram.h>
-#include <shapes/arrow.h>
 
 using namespace  std;
 
@@ -65,6 +63,9 @@ void CreateDiagramForm::on_blockButton_clicked()
     Block *block = new Block(sceneCenterX, sceneCenterY, 100, 50);
     myScene->addItem(block);
     shapeContainer->addElement(block);
+
+    connect(block, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+    connect(block, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
 }
 
 void CreateDiagramForm::on_ifBlockButton_clicked()
@@ -72,6 +73,9 @@ void CreateDiagramForm::on_ifBlockButton_clicked()
     IfBlock *ifBlock = new IfBlock(sceneCenterX, sceneCenterY);
     myScene->addItem(ifBlock);
     shapeContainer->addElement(ifBlock);
+
+    connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+    connect(ifBlock, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
 }
 
 void CreateDiagramForm::on_endBlockButton_clicked()
@@ -79,6 +83,8 @@ void CreateDiagramForm::on_endBlockButton_clicked()
      Exit *exit = new Exit(sceneCenterX, sceneCenterY);
      myScene->addItem(exit);
      shapeContainer->addElement(exit);
+
+     connect(exit, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
 }
 
 void CreateDiagramForm::on_barButton_clicked()
@@ -86,6 +92,9 @@ void CreateDiagramForm::on_barButton_clicked()
      Bar *bar = new Bar(sceneCenterX, sceneCenterY);
      myScene->addItem(bar);
      shapeContainer->addElement(bar);
+
+     connect(bar, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+     connect(bar, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
 }
 
 void CreateDiagramForm::on_startBlockButton_clicked()
@@ -93,9 +102,29 @@ void CreateDiagramForm::on_startBlockButton_clicked()
      Entrance *entrance = new Entrance(sceneCenterX, sceneCenterY);
      myScene->addItem(entrance);
      shapeContainer->addElement(entrance);
+
+     connect(entrance, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+     connect(entrance, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
 }
 
 void CreateDiagramForm::on_clearSceneButton_clicked()
 {
     myScene->clear();
+}
+
+void CreateDiagramForm::addArrow(Shape *to)
+{
+    qDebug("safafafaffas");
+    if (arrowFrom) {
+        Arrow *arrow = new Arrow(arrowFrom, to);
+        myScene->addItem(arrow);
+        myScene->update();
+    }
+
+    arrowFrom = NULL;
+}
+
+void CreateDiagramForm::setArrowFrom(Shape *from)
+{
+    this->arrowFrom = from;
 }
