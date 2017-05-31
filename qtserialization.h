@@ -15,6 +15,7 @@ public:
     void loadFromFile(Diagram<Shape> *shapeContainer);
 private:
     void parser(Diagram<Shape> *shapeContainer, QList<SerializeShape*> *SSList);
+    Shape* findShapeInContainer(Diagram<Shape> *shapeContainer, QString unicNumber);
     QString fileName;
 };
 

@@ -41,14 +41,17 @@ void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
         out << shape->getUnicNumber();
     }
 
-    out << "MDP";
-
     for (int i = 0; i < v.size(); i++) {
-        out << v[i].size();
+        out << v[i].size() - 1;
 
-        for(Shape *shape : v[i]) {
+        list<Shape*>::iterator Iter = v[i].begin();
+        list<Shape*>::iterator endIter = v[i].end();
+        ++Iter;
+        while (Iter != endIter) {
+            Shape *shape = *Iter;
             qDebug() << shape->getUnicNumber();
             out << shape->getUnicNumber();
+            ++Iter;
         }
     }
 
@@ -93,11 +96,17 @@ void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer) {
 
     parser(shapeContainer, SSList);
 
+    vector<list<Shape*>> vec =  shapeContainer->getVector();
+
     for(int i = 0; i < size; i++)
     {
         int countOfLink = 0;
         in >> countOfLink;
-
+        for(int j = 0; j < countOfLink; j++) {
+            QString unicNumber;
+            in >> unicNumber;
+            shapeContainer->addLink(vec[i].front(), findShapeInContainer(shapeContainer, unicNumber));
+        }
     }
 
     file.close();
@@ -137,3 +146,15 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
         }
     }
 }
+
+Shape* MySerialization::findShapeInContainer(Diagram<Shape> *shapeContainer, QString unicNumber) {
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+    for (int i = 0; i < v.size(); i++) {
+        Shape *shape = v[i].front();
+        if(shape->getUnicNumber() == unicNumber) {
+            return shape;
+        }
+    }
+}
+
+
