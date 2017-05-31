@@ -1,6 +1,7 @@
 #include "creatediagramform.h"
 #include "ui_creatediagramform.h"
 #include "scene.h"
+#include "qtserialization.h"
 
 #include <shapes/bar.h>
 #include <shapes/block.h>
@@ -181,4 +182,19 @@ void CreateDiagramForm::clearArrows()
         myScene->removeItem(arrows[i]);
     }
     arrows.clear();
+}
+
+void CreateDiagramForm::on_saveButton_clicked()
+{
+    MySerialization *qt = new MySerialization;
+    qt->saveToFile(shapeContainer);
+    QMessageBox::warning(this,"Success","Saved Scene Data to File");
+}
+
+void CreateDiagramForm::on_loadButton_clicked()
+{
+    MySerialization *qt = new MySerialization;
+    qt->loadFromFile(shapeContainer);
+    myScene->update();
+    QMessageBox::warning(this,"Success","Loaded scene from file");
 }

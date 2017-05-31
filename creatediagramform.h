@@ -40,6 +40,10 @@ private slots:
     void repain();
     void initDiargamOnScene(Diagram<Shape>*);
     void clearArrows();
+    void on_saveButton_clicked();
+
+    void on_loadButton_clicked();
+
 private:
     Scene *myScene;
     int sceneCenterX;
