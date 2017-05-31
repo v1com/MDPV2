@@ -21,6 +21,8 @@ CreateDiagramForm::CreateDiagramForm(QWidget *parent) :
     ui->mainGraphicsView->setRenderHint(QPainter::Antialiasing);
 
     myScene = new Scene();
+//    connect(myScene,SIGNAL(changed(QList<QRectF>)),this,SLOT(clearAndPrint()));
+
     myScene->setSceneRect(ui->mainGraphicsView->pos().x(), ui->mainGraphicsView->pos().y(), ui->mainGraphicsView->width(), ui->mainGraphicsView->height());
     sceneCenterX = myScene->width() / 2;
     sceneCenterY = myScene->height() / 2;
@@ -29,25 +31,7 @@ CreateDiagramForm::CreateDiagramForm(QWidget *parent) :
 
     //shapeContainer->addElement(block2);
     //shapeContainer->addLink(block1, block2);
-
-    vector<list<Shape*>> v =  shapeContainer->getVector();
-        for (int i = 0; i < v.size(); i++){
-            list<Shape*>::iterator Iter = v[i].begin();
-            list<Shape*>::iterator endIter = v[i].end();
-            myScene->addItem(*Iter);
-
-             while (Iter != endIter){
-                Shape *shape = *Iter;
-                ++Iter;
-                if (Iter != endIter){
-                    Shape *tempShape = *Iter;
-
-                    Arrow *arrow = new Arrow(shape->getBottomPoint(), tempShape->getUpperPoint(), FromBottomDirection);
-                    myScene->addItem(arrow);
-                }
-           }
-
-         }
+    initDiargamOnScene(shapeContainer);
 
 
     ui->mainGraphicsView->setScene(myScene);
@@ -66,6 +50,7 @@ void CreateDiagramForm::on_blockButton_clicked()
 
     connect(block, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
     connect(block, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+    connect(block, SIGNAL(shapeMoved()),this,SLOT(repain()));
 }
 
 void CreateDiagramForm::on_ifBlockButton_clicked()
@@ -76,6 +61,7 @@ void CreateDiagramForm::on_ifBlockButton_clicked()
 
     connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
     connect(ifBlock, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+    connect(ifBlock,SIGNAL(shapeMoved()),this,SLOT(repain()));
 }
 
 void CreateDiagramForm::on_endBlockButton_clicked()
@@ -85,6 +71,7 @@ void CreateDiagramForm::on_endBlockButton_clicked()
      shapeContainer->addElement(exit);
 
      connect(exit, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+     connect(exit,SIGNAL(shapeMoved()),this,SLOT(repain()));
 }
 
 void CreateDiagramForm::on_barButton_clicked()
@@ -95,6 +82,7 @@ void CreateDiagramForm::on_barButton_clicked()
 
      connect(bar, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
      connect(bar, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+     connect(bar, SIGNAL(shapeMoved()),this,SLOT(repain()));
 }
 
 void CreateDiagramForm::on_startBlockButton_clicked()
@@ -105,11 +93,18 @@ void CreateDiagramForm::on_startBlockButton_clicked()
 
      connect(entrance, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
      connect(entrance, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+     connect(entrance,SIGNAL(shapeMoved()),this,SLOT(repain()));
 }
 
 void CreateDiagramForm::on_clearSceneButton_clicked()
 {
-    myScene->clear();
+    QList<QGraphicsItem*> items = myScene->items();
+    for(int i=0;i<items.size();i++){
+        myScene->removeItem(items[i]);
+    }
+    myScene->update();
+    shapeContainer->deleteLater();
+    shapeContainer = new Diagram<Shape>;
 }
 
 void CreateDiagramForm::addArrow(Shape *to)
@@ -118,6 +113,8 @@ void CreateDiagramForm::addArrow(Shape *to)
     if (arrowFrom) {
         Arrow *arrow = new Arrow(arrowFrom, to);
         myScene->addItem(arrow);
+        arrows.append(arrow);
+        shapeContainer->addLink(arrowFrom,to);
         myScene->update();
     }
 
@@ -127,4 +124,63 @@ void CreateDiagramForm::addArrow(Shape *to)
 void CreateDiagramForm::setArrowFrom(Shape *from)
 {
     this->arrowFrom = from;
+}
+
+
+
+void CreateDiagramForm::repain(){
+    QList<QGraphicsItem*> sceneItems = myScene->items();
+    for(int i=0;i<sceneItems.size();i++){
+        qDebug() << sceneItems[i];
+    }
+    clearArrows();
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+        for (int i = 0; i < v.size(); i++){
+            list<Shape*>::iterator Iter = v[i].begin();
+            list<Shape*>::iterator endIter = v[i].end();
+
+             while (Iter != endIter){
+                Shape *shape = *Iter;
+                ++Iter;
+                if (Iter != endIter){
+                    Shape *tempShape = *Iter;
+                    Arrow *arrow = new Arrow(shape->getBottomPoint(), tempShape->getUpperPoint(), FromBottomDirection);
+                    myScene->addItem(arrow);
+                    arrows.append(arrow);
+                    myScene->update();
+                }
+           }
+
+        }
+}
+
+void CreateDiagramForm::initDiargamOnScene(Diagram<Shape> *)
+{
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+    for (int i = 0; i < v.size(); i++){
+        list<Shape*>::iterator Iter = v[i].begin();
+        list<Shape*>::iterator endIter = v[i].end();
+
+        myScene->addItem(*Iter);
+
+        while (Iter != endIter){
+            Shape *shape = *Iter;
+            ++Iter;
+            if (Iter != endIter){
+                Shape *tempShape = *Iter;
+                Arrow *arrow = new Arrow(shape->getBottomPoint(), tempShape->getUpperPoint(), FromBottomDirection);
+                myScene->addItem(arrow);
+                arrows.append(arrow);
+                myScene->update();
+            }
+       }
+    }
+}
+
+void CreateDiagramForm::clearArrows()
+{
+    for(int i=0;i<arrows.size();i++){
+        myScene->removeItem(arrows[i]);
+    }
+    arrows.clear();
 }

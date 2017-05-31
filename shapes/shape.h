@@ -42,7 +42,7 @@ public slots:
 signals:
      void addArrowSignal(Shape *fromShape);
      void mouseClicked(Shape *toShape);
-
+     void shapeMoved();
 protected:
     int myX, myY, myWidth, myHeight;
 

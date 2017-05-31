@@ -62,7 +62,7 @@ void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    emit shapeMoved();
 }
 
 void Shape::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)

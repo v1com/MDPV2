@@ -19,6 +19,7 @@ class CreateDiagramForm : public QWidget
 
 public:
     explicit CreateDiagramForm(QWidget *parent = 0);
+    QList<Arrow*> arrows;
     ~CreateDiagramForm();
 
 private slots:
@@ -36,7 +37,9 @@ private slots:
 
     void addArrow(Shape *to);
     void setArrowFrom(Shape *from);
-
+    void repain();
+    void initDiargamOnScene(Diagram<Shape>*);
+    void clearArrows();
 private:
     Scene *myScene;
     int sceneCenterX;
