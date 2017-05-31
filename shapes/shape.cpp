@@ -3,7 +3,12 @@
 
 Shape::Shape()
 {
+    unicNumber = QUuid::createUuid().toString();
+}
 
+QString Shape::getUnicNumber()
+{
+    return unicNumber;
 }
 
 int Shape::getWidth()

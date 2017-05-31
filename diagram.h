@@ -3,7 +3,6 @@
 #include <QObject>
 #include <iostream>
 
-
 using namespace std;
 
 class DiagramSignalsSlots : public QObject
@@ -36,10 +35,6 @@ private:
     vector <list <T*>> vertexes;
 };
 
-
-
-
-
 template <class T>
 Diagram<T>::Diagram(){
 }
@@ -49,8 +44,8 @@ vector <list<T>> Diagram<T>::getVectorForRel(){
     vector <list<T>> v;
     int size = vertexes.size();
         for (int i = 0; i < size; i++){
-           list<T*>::iterator Iter = vertexes[i].begin();
-           list<T*>::iterator endIter = vertexes[i].begin();
+           typename list<T*>::iterator Iter = vertexes[i].begin();
+           typename list<T*>::iterator endIter = vertexes[i].begin();
            while(Iter != endIter){
               // v[i].push_back(*(*Iter));
                ++Iter;
@@ -58,8 +53,6 @@ vector <list<T>> Diagram<T>::getVectorForRel(){
         }
         return v;
 }
-
-
 
 template <class T>
 void Diagram<T>::show() {

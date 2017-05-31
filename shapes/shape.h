@@ -21,6 +21,7 @@ public:
     int getWidth();
     int getHeight();
     QPoint getCoords();
+    QString getUnicNumber();
 
     virtual QPoint getBottomPoint() = 0;
     virtual QPoint getUpperPoint() = 0;
@@ -45,7 +46,7 @@ signals:
      void shapeMoved();
 protected:
     int myX, myY, myWidth, myHeight;
-
+    QString unicNumber;
     ShapeType shapeType;
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
