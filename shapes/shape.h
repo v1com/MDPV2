@@ -22,6 +22,7 @@ public:
     int getHeight();
     QPoint getCoords();
     QString getUnicNumber();
+    void setUnicNumber(QString unicNumber);
 
     virtual QPoint getBottomPoint() = 0;
     virtual QPoint getUpperPoint() = 0;

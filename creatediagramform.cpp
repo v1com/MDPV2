@@ -128,7 +128,7 @@ void CreateDiagramForm::setArrowFrom(Shape *from)
 
 
 
-void CreateDiagramForm::repain(){
+void CreateDiagramForm::repain() {
     QList<QGraphicsItem*> sceneItems = myScene->items();
     for(int i=0;i<sceneItems.size();i++){
         qDebug() << sceneItems[i];
@@ -140,6 +140,7 @@ void CreateDiagramForm::repain(){
             list<Shape*>::iterator endIter = v[i].end();
 
             Shape *shape = *Iter;
+            myScene->addItem(shape);
              while (Iter != endIter){
                 ++Iter;
                 if (Iter != endIter){
@@ -195,6 +196,6 @@ void CreateDiagramForm::on_loadButton_clicked()
 {
     MySerialization *qt = new MySerialization;
     qt->loadFromFile(shapeContainer);
-    myScene->update();
+    repain();
     QMessageBox::warning(this,"Success","Loaded scene from file");
 }

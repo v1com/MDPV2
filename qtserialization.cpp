@@ -6,7 +6,11 @@
 #include <QGraphicsItem>
 #include <QDebug>
 
+#include <shapes/bar.h>
 #include <shapes/block.h>
+#include <shapes/entrance.h>
+#include <shapes/exit.h>
+#include <shapes/ifblock.h>
 #include <shapes/shape.h>
 
 MySerialization::MySerialization()
@@ -103,7 +107,33 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
 
     for(SerializeShape *sshape : *SSList) {
         if(sshape->shapeType == BlockType) {
-            shapeContainer->addElement(new Block(sshape->x, sshape->y, sshape->w, sshape->h));
+            Block *block = new Block(sshape->x, sshape->y, sshape->w, sshape->h);
+            block->setUnicNumber(sshape->unicNumber);
+            shapeContainer->addElement(block);
+        }
+
+        if(sshape->shapeType == IfBlockType) {
+            IfBlock *ifBlock = new IfBlock(sshape->x, sshape->y);
+            ifBlock->setUnicNumber(sshape->unicNumber);
+            shapeContainer->addElement(ifBlock);
+        }
+
+        if(sshape->shapeType == BarType) {
+            Bar *bar = new Bar(sshape->x, sshape->y);
+            bar->setUnicNumber(sshape->unicNumber);
+            shapeContainer->addElement(bar);
+        }
+
+        if(sshape->shapeType == ExitType) {
+            Exit *exit = new Exit(sshape->x, sshape->y);
+            exit->setUnicNumber(sshape->unicNumber);
+            shapeContainer->addElement(exit);
+        }
+
+        if(sshape->shapeType == EntranceType) {
+            Entrance *entrance = new Entrance(sshape->x, sshape->y);
+            entrance->setUnicNumber(sshape->unicNumber);
+            shapeContainer->addElement(entrance);
         }
     }
 }

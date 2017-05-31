@@ -11,6 +11,11 @@ QString Shape::getUnicNumber()
     return unicNumber;
 }
 
+void Shape::setUnicNumber(QString unicNumber)
+{
+    this->unicNumber = unicNumber;
+}
+
 int Shape::getWidth()
 {
     return myWidth;
