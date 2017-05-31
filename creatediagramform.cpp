@@ -103,7 +103,6 @@ void CreateDiagramForm::on_clearSceneButton_clicked()
         myScene->removeItem(items[i]);
     }
     myScene->update();
-    shapeContainer->deleteLater();
     shapeContainer = new Diagram<Shape>;
 }
 
@@ -139,18 +138,17 @@ void CreateDiagramForm::repain(){
             list<Shape*>::iterator Iter = v[i].begin();
             list<Shape*>::iterator endIter = v[i].end();
 
+            Shape *shape = *Iter;
              while (Iter != endIter){
-                Shape *shape = *Iter;
                 ++Iter;
                 if (Iter != endIter){
                     Shape *tempShape = *Iter;
-                    Arrow *arrow = new Arrow(shape->getBottomPoint(), tempShape->getUpperPoint(), FromBottomDirection);
+                    Arrow *arrow = new Arrow(shape, tempShape);
                     myScene->addItem(arrow);
                     arrows.append(arrow);
                     myScene->update();
                 }
            }
-
         }
 }
 
@@ -168,7 +166,7 @@ void CreateDiagramForm::initDiargamOnScene(Diagram<Shape> *)
             ++Iter;
             if (Iter != endIter){
                 Shape *tempShape = *Iter;
-                Arrow *arrow = new Arrow(shape->getBottomPoint(), tempShape->getUpperPoint(), FromBottomDirection);
+                Arrow *arrow = new Arrow(shape,tempShape);
                 myScene->addItem(arrow);
                 arrows.append(arrow);
                 myScene->update();

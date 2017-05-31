@@ -30,14 +30,36 @@ public:
     void addElement (T *element);
     void deleteEl(T *element);
     vector<list<T*>> getVector() { return vertexes; }
+    vector<list<T>> getVectorForRel();
 
 private:
     vector <list <T*>> vertexes;
 };
 
+
+
+
+
 template <class T>
 Diagram<T>::Diagram(){
 }
+
+template <class T>
+vector <list<T>> Diagram<T>::getVectorForRel(){
+    vector <list<T>> v;
+    int size = vertexes.size();
+        for (int i = 0; i < size; i++){
+           list<T*>::iterator Iter = vertexes[i].begin();
+           list<T*>::iterator endIter = vertexes[i].begin();
+           while(Iter != endIter){
+              // v[i].push_back(*(*Iter));
+               ++Iter;
+           }
+        }
+        return v;
+}
+
+
 
 template <class T>
 void Diagram<T>::show() {
