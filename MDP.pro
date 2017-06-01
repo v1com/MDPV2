@@ -38,7 +38,7 @@ SOURCES += main.cpp\
     qtserialization.cpp \
     serializeshape.cpp \
     inputdialog.cpp \
-    inputifdialog.cpp
+    inputifdialog.cpp \
     shapetests/block_test.cpp
 
 HEADERS  += maindialog.h \
@@ -58,7 +58,7 @@ HEADERS  += maindialog.h \
     qtserialization.h \
     serializeshape.h \
     inputdialog.h \
-    inputifdialog.h
+    inputifdialog.h \
     shapetests/block_test.h
 
 FORMS    += maindialog.ui \
