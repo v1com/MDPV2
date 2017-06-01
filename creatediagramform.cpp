@@ -238,6 +238,7 @@ Shape* CreateDiagramForm::recur(Shape* s) {
            ++Iter;
            Shape* tmp = *Iter;
            tmp->setCost(tmp->getCost() + recur(*Iter)->getCost());
+           tmp->setDays(tmp->getDays() + recur(*Iter)->getDays());
         }
     }
 }
