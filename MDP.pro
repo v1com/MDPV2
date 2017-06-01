@@ -39,7 +39,11 @@ SOURCES += main.cpp\
     serializeshape.cpp \
     inputdialog.cpp \
     inputifdialog.cpp \
-    shapetests/block_test.cpp
+    shapetests/block_test.cpp \
+    shapetests/bar_test.cpp \
+    shapetests/entrance_test.cpp \
+    shapetests/exit_test.cpp \
+    shapetests/ifblock_test.cpp
 
 HEADERS  += maindialog.h \
     allocator/allocator.h \
@@ -59,7 +63,11 @@ HEADERS  += maindialog.h \
     serializeshape.h \
     inputdialog.h \
     inputifdialog.h \
-    shapetests/block_test.h
+    shapetests/block_test.h \
+    shapetests/bar_test.h \
+    shapetests/entrance_test.h \
+    shapetests/exit_test.h \
+    shapetests/ifblock_test.h
 
 FORMS    += maindialog.ui \
     creatediagramform.ui \

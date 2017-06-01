@@ -50,7 +50,7 @@ void CreateDiagramForm::on_blockButton_clicked()
 
     if(dialog->exec())
     {
-        std::string name;
+        QString name;
         int cost;
         int days;
         dialog->getInputData(name, days, cost);
@@ -78,7 +78,7 @@ void CreateDiagramForm::on_ifBlockButton_clicked()
 
     if(dialog->exec())
     {
-        std::string name;
+        QString name;
 
         dialog->getInputData(name);
 
@@ -212,14 +212,64 @@ void CreateDiagramForm::clearArrows()
 void CreateDiagramForm::on_saveButton_clicked()
 {
     MySerialization *qt = new MySerialization;
-    qt->saveToFile(shapeContainer);
+    QFileDialog dialog(this);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setFileMode(QFileDialog::Directory);
+    dialog.setNameFilter(tr("Files (*.daf)"));
+    QStringList fileNames;
+    QString fileName;
+    if(dialog.exec()){
+        fileNames = dialog.selectedFiles();
+        fileName = fileNames[0];
+    }
+    qt->saveToFile(shapeContainer,fileName);
     QMessageBox::warning(this,"Success","Saved Scene Data to File");
 }
 
 void CreateDiagramForm::on_loadButton_clicked()
 {
     MySerialization *qt = new MySerialization;
-    qt->loadFromFile(shapeContainer, this);
+    QFileDialog dialog(this);
+    dialog.setAcceptMode(QFileDialog::AcceptOpen);
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setNameFilter(tr("Files (*.daf)"));
+    QStringList fileNames;
+    QString fileName;
+    if(dialog.exec()){
+        fileNames = dialog.selectedFiles();
+        fileName = fileNames[0];
+    }
+    qt->loadFromFile(shapeContainer, this, fileName);
     repain();
     QMessageBox::warning(this,"Success","Loaded scene from file");
+}
+
+Shape* CreateDiagramForm::recur(Shape* s) {
+
+    if (s->getType() == ExitType)
+        return s;
+
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+
+    for (int i = 0; i < v.size(); i++){
+        Shape* tmp = v[i].front();
+        if (tmp == s) {
+           list<Shape*>::iterator Iter = v[i].begin();
+           ++Iter;
+           Shape* tmp = *Iter;
+           tmp->setCost(tmp->getCost() + recur(*Iter)->getCost());
+           tmp->setDays(tmp->getDays() + recur(*Iter)->getDays());
+        }
+    }
+}
+
+Shape* CreateDiagramForm::returnStartBlock() {
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+
+    for (int i = 0; i < v.size(); i++){
+        Shape* tmp = v[i].front();
+        if (tmp->getType() == EntranceType) {
+            return tmp;
+        }
+    }
 }

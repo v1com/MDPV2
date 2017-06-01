@@ -15,7 +15,7 @@ public:
     explicit InputIfDialog(QWidget *parent = 0);
     ~InputIfDialog();
 
-    void getInputData(std::string &name);
+    void getInputData(QString &name);
 
 private:
     Ui::InputIfDialog *ui;

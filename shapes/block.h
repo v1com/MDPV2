@@ -15,10 +15,10 @@ public:
 
     QPoint getOutPoint();
 
-    void setText(std::string text);
+    void setText(QString text);
 
 private:
-    std::string text = "";
+    QString text = "";
 };
 
 #endif // Block_H

@@ -40,6 +40,8 @@ private slots:
     void addArrow(Shape *to);
     void setArrowFrom(Shape *from);
     void repain();
+    Shape* recur(Shape* s);
+    Shape* returnStartBlock();
     void initDiargamOnScene(Diagram<Shape>*);
     void clearArrows();
     void on_saveButton_clicked();

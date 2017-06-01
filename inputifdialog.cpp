@@ -13,7 +13,7 @@ InputIfDialog::~InputIfDialog()
     delete ui;
 }
 
-void InputIfDialog::getInputData(std::string &name)
+void InputIfDialog::getInputData(QString &name)
 {
-    name = ui->workersEdit->text().toStdString();
+    name = ui->workersEdit->text();
 }

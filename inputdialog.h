@@ -15,7 +15,7 @@ public:
     explicit InputDialog(QWidget *parent = 0);
     ~InputDialog();
 
-    void getInputData(std::string &name, int &days, int &cost);
+    void getInputData(QString &name, int &days, int &cost);
 
 private:
     Ui::inputDialog *ui;
