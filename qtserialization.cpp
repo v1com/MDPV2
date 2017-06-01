@@ -40,6 +40,9 @@ void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
         out << shape->getWidth();
         out << shape->getHeight();
         out << shape->getUnicNumber();
+        out << shape->getName();
+        out << shape->getDays();
+        out << shape->getCost();
     }
 
     for (int i = 0; i < v.size(); i++) {
@@ -79,6 +82,9 @@ void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagram
         int y = 0;
         int w = 0;
         int h = 0;
+        int days = 0;
+        int cost = 0;
+        QString name = "";
         QString unicNumber;
 
         in >> index;
@@ -88,8 +94,11 @@ void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagram
         in >> w;
         in >> h;
         in >> unicNumber;
+        in >> name;
+        in >> days;
+        in >> cost;
 
-        SerializeShape *ss = new SerializeShape(index, shapeType, x, y, w, h, unicNumber);
+        SerializeShape *ss = new SerializeShape(index, shapeType, x, y, w, h, unicNumber, name, days, cost);
         SSList->append(ss);
     }
 
@@ -119,6 +128,10 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
             block->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(block);
 
+            block->setName(sshape->name);
+            block->setDays(sshape->days);
+            block->setCost(sshape->cost);
+
             connect(block, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
             connect(block, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
             connect(block, SIGNAL(shapeMoved()), scene, SLOT(repain()));
@@ -128,6 +141,10 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
             IfBlock *ifBlock = new IfBlock(sshape->x, sshape->y);
             ifBlock->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(ifBlock);
+
+            ifBlock->setName(sshape->name);
+            ifBlock->setDays(sshape->days);
+            ifBlock->setCost(sshape->cost);
 
             connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
             connect(ifBlock, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
@@ -139,6 +156,10 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
             bar->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(bar);
 
+            bar->setName(sshape->name);
+            bar->setDays(sshape->days);
+            bar->setCost(sshape->cost);
+
             connect(bar, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
             connect(bar, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
             connect(bar, SIGNAL(shapeMoved()), scene, SLOT(repain()));
@@ -149,6 +170,10 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
             exit->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(exit);
 
+            exit->setName(sshape->name);
+            exit->setDays(sshape->days);
+            exit->setCost(sshape->cost);
+
             connect(exit, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
             connect(exit, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
             connect(exit, SIGNAL(shapeMoved()), scene, SLOT(repain()));
@@ -158,6 +183,10 @@ void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShap
             Entrance *entrance = new Entrance(sshape->x, sshape->y);
             entrance->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(entrance);
+
+            entrance->setName(sshape->name);
+            entrance->setDays(sshape->days);
+            entrance->setCost(sshape->cost);
 
             connect(entrance, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
             connect(entrance, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));

@@ -36,10 +36,14 @@ public:
     void setMyX(int x);
     void setMyY(int y);
 
-    void setInformation(std::string name, int cost = 0, int days = 0);
-    std::string getName();
+    void setInformation(QString name, int cost = 0, int days = 0);
+
+    void setCost(int cost);
+    void setDays(int days);
+    void setName(QString name);
     int getCost();
     int getDays();
+    QString getName();
 
     ShapeType getType();
 
@@ -55,7 +59,7 @@ protected:
     QString unicNumber;
     ShapeType shapeType;
 
-    std::string name = "";
+    QString name = "";
     int days;
     int cost;
 

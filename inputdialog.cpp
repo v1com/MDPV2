@@ -13,9 +13,9 @@ InputDialog::~InputDialog()
     delete ui;
 }
 
-void InputDialog::getInputData(std::string &name, int &days, int &cost)
+void InputDialog::getInputData(QString &name, int &days, int &cost)
 {
-    name = ui->nameEdit->text().toStdString();
+    name = ui->nameEdit->text();
     days = ui->daysEdit->text().toInt();
     cost = ui->costEdit->text().toInt();
 }

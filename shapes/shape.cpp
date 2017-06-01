@@ -48,16 +48,31 @@ void Shape::setMyY(int y) {
     myY = y;
 }
 
-void Shape::setInformation(std::string name, int cost, int days)
+void Shape::setInformation(QString name, int cost, int days)
 {
     this->name = name;
     this->cost = cost;
     this->days = days;
 }
 
-std::string Shape::getName()
+QString Shape::getName()
 {
     return name;
+}
+
+void Shape::setCost(int cost)
+{
+    this->cost = cost;
+}
+
+void Shape::setDays(int days)
+{
+    this->days = days;
+}
+
+void Shape::setName(QString name)
+{
+    this->name = name;
 }
 
 int Shape::getCost()

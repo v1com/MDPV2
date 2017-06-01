@@ -50,7 +50,7 @@ void CreateDiagramForm::on_blockButton_clicked()
 
     if(dialog->exec())
     {
-        std::string name;
+        QString name;
         int cost;
         int days;
         dialog->getInputData(name, days, cost);
@@ -78,7 +78,7 @@ void CreateDiagramForm::on_ifBlockButton_clicked()
 
     if(dialog->exec())
     {
-        std::string name;
+        QString name;
 
         dialog->getInputData(name);
 
