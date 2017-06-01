@@ -17,9 +17,6 @@ public:
 
     QPoint getOutPoint();
 
-private:
-    bool isFirstOutArrow = true;
-    bool isFirstInArrow = true;
 };
 
 #endif // BAR_H

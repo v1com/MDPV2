@@ -7,7 +7,7 @@ Bar::Bar(int x, int y)
 
     shapeType = BarType;
 
-    myWidth = 100;
+    myWidth = 130;
     myHeight = 5;
 
     setToolTip("Bar");
@@ -34,31 +34,12 @@ QRectF Bar::boundingRect() const
 
 QPoint Bar::getBottomPoint()
 {
-    if (isFirstOutArrow) {
-        isFirstOutArrow = false;
-        return QPoint(myX + myWidth / 2, myY + myHeight);
-    }
-    else {
-        auto myScene = scene();
-        myWidth += 110;
-        myScene->update();
-        return QPoint(myX + myWidth - 50, myY + myHeight);
-    }
+    return QPoint(myX + myWidth / 2, myY + myHeight);
 }
 
 QPoint Bar::getUpperPoint()
 {
-    if (isFirstInArrow) {
-        isFirstInArrow = false;
-        return QPoint(myX + myWidth / 2, myY);
-    }
-    else {
-        auto myScene = scene();
-        myWidth += 110;
-        myScene->update();
-        return QPoint(myX + myWidth - 50, myY);
-    }
-
+     return QPoint(myX + myWidth / 2, myY);
 }
 
 QPoint Bar::getLeftPoint()

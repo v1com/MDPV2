@@ -56,12 +56,7 @@ QPoint IfBlock::getLeftPoint()
 
 QPoint IfBlock::getOutPoint()
 {
-    if (isFirstArrow){
-        isFirstArrow = false;
-        return getLeftPoint();
-    }
-    else
-        return getRightPoint();
+    return getRightPoint();
 }
 
 QPoint IfBlock::getRightPoint()
