@@ -47,6 +47,13 @@ Arrow::Arrow(Shape *fromShape, Shape *toShape){
     from = fromShape->getOutPoint();
     to = toShape->getUpperPoint();
 
+    if (fromShape->getType() == IfBlockType) {
+        if (fromShape->getMyX() > to.x())
+            from = fromShape->getLeftPoint();
+        else
+            from = fromShape->getRightPoint();
+    }
+
     if (from.y() < to.y()) {
         // FROM сверху, TO ровно под ним
         if (from.x() == to.x()) {

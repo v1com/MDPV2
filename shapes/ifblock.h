@@ -14,8 +14,7 @@ public:
     QPoint getLeftPoint();
 
     QPoint getOutPoint();
-private:
-    bool isFirstArrow = true;
+
 };
 
 #endif // IFBLOCK_H
