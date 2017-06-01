@@ -19,7 +19,7 @@ MySerialization::MySerialization()
     qDebug(fileName.toLatin1());
 }
 
-void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
+void MySerialization::saveToFile(Diagram<Shape> *shapeContainer,QString fileName) {
 
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly)) {
@@ -61,7 +61,7 @@ void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
     file.close();
 }
 
-void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagramForm *scene) {
+void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagramForm *scene, QString fileName) {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug("cant open");

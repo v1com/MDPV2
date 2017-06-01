@@ -14,8 +14,8 @@ class MySerialization : public QObject
     Q_OBJECT
 public:
     MySerialization();
-    void saveToFile(Diagram<Shape> *shapeContainer);
-    void loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagramForm *scene);
+    void saveToFile(Diagram<Shape> *shapeContainer, QString file);
+    void loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagramForm *scene, QString file);
 private:
     void parser(Diagram<Shape> *shapeContainer, QList<SerializeShape*> *SSList, CreateDiagramForm *scene);
     Shape* findShapeInContainer(Diagram<Shape> *shapeContainer, QString unicNumber);

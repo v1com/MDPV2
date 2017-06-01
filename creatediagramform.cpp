@@ -212,14 +212,34 @@ void CreateDiagramForm::clearArrows()
 void CreateDiagramForm::on_saveButton_clicked()
 {
     MySerialization *qt = new MySerialization;
-    qt->saveToFile(shapeContainer);
+    QFileDialog dialog(this);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setFileMode(QFileDialog::Directory);
+    dialog.setNameFilter(tr("Files (*.daf)"));
+    QStringList fileNames;
+    QString fileName;
+    if(dialog.exec()){
+        fileNames = dialog.selectedFiles();
+        fileName = fileNames[0];
+    }
+    qt->saveToFile(shapeContainer,fileName);
     QMessageBox::warning(this,"Success","Saved Scene Data to File");
 }
 
 void CreateDiagramForm::on_loadButton_clicked()
 {
     MySerialization *qt = new MySerialization;
-    qt->loadFromFile(shapeContainer, this);
+    QFileDialog dialog(this);
+    dialog.setAcceptMode(QFileDialog::AcceptOpen);
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setNameFilter(tr("Files (*.daf)"));
+    QStringList fileNames;
+    QString fileName;
+    if(dialog.exec()){
+        fileNames = dialog.selectedFiles();
+        fileName = fileNames[0];
+    }
+    qt->loadFromFile(shapeContainer, this, fileName);
     repain();
     QMessageBox::warning(this,"Success","Loaded scene from file");
 }
