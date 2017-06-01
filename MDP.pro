@@ -35,7 +35,9 @@ SOURCES += main.cpp\
     scene.cpp \
     creatediagramform.cpp \
     qtserialization.cpp \
-    serializeshape.cpp
+    serializeshape.cpp \
+    inputdialog.cpp \
+    inputifdialog.cpp
 
 HEADERS  += maindialog.h \
     allocator/allocator.h \
@@ -52,7 +54,11 @@ HEADERS  += maindialog.h \
     creatediagramform.h \
     shapes/arrowdirection.h \
     qtserialization.h \
-    serializeshape.h
+    serializeshape.h \
+    inputdialog.h \
+    inputifdialog.h
 
 FORMS    += maindialog.ui \
-    creatediagramform.ui
+    creatediagramform.ui \
+    inputdialog.ui \
+    inputifdialog.ui

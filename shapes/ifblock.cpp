@@ -30,6 +30,7 @@ void IfBlock::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
         QPoint(myX, myY + myHeight / 2),
     };
     painter->drawPolygon(points, 4);
+    painter->drawText(myX - myWidth / 2 + 10, myY - myHeight / 2 + 10, myWidth - 10, myHeight - 10, 0, name.c_str());
 }
 
 

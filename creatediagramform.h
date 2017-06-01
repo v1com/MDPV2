@@ -3,6 +3,8 @@
 
 #include "Scene.h"
 #include "diagram.h"
+#include "inputdialog.h"
+#include "inputifdialog.h"
 
 #include <QWidget>
 

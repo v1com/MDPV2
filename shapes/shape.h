@@ -36,6 +36,11 @@ public:
     void setMyX(int x);
     void setMyY(int y);
 
+    void setInformation(std::string name, int cost = 0, int days = 0);
+    std::string getName();
+    int getCost();
+    int getDays();
+
     ShapeType getType();
 
 public slots:
@@ -49,6 +54,10 @@ protected:
     int myX, myY, myWidth, myHeight;
     QString unicNumber;
     ShapeType shapeType;
+
+    std::string name = "";
+    int days;
+    int cost;
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

@@ -23,7 +23,7 @@ void Block::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setPen(QPen(Qt::black, 1));
     painter->setBrush(* new QBrush(Qt::gray));
     painter->drawRect(myX - myWidth / 2, myY - myHeight / 2, myWidth, myHeight);
-    painter->drawText(myX - myWidth / 2, myY - myHeight / 2, myWidth, myHeight, 0, "testtest\ntesttesttest");
+    painter->drawText(myX - myWidth / 2 + 5, myY - myHeight / 2 + 5, myWidth - 5, myHeight - 5, 0, text.c_str());
 }
 
 
@@ -54,4 +54,9 @@ QPoint Block::getRightPoint()
 
 QPoint Block::getOutPoint() {
     return getBottomPoint();
+}
+
+void Block::setText(std::string text)
+{
+    this->text = text;
 }

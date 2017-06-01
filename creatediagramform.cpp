@@ -45,24 +45,54 @@ CreateDiagramForm::~CreateDiagramForm()
 
 void CreateDiagramForm::on_blockButton_clicked()
 {
-    Block *block = new Block(sceneCenterX, sceneCenterY, 100, 50);
-    myScene->addItem(block);
-    shapeContainer->addElement(block);
+    InputDialog *dialog = new InputDialog();
+    dialog->show();
 
-    connect(block, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
-    connect(block, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
-    connect(block, SIGNAL(shapeMoved()),this,SLOT(repain()));
+    if(dialog->exec())
+    {
+        std::string name;
+        int cost;
+        int days;
+        dialog->getInputData(name, days, cost);
+
+        Block *block = new Block(sceneCenterX, sceneCenterY, 100, 50);
+
+        block->setInformation(name, cost, days);
+        block->setText(name);
+
+        myScene->addItem(block);
+        shapeContainer->addElement(block);
+
+        connect(block, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+        connect(block, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+        connect(block, SIGNAL(shapeMoved()),this,SLOT(repain()));
+    }
+
+
 }
 
 void CreateDiagramForm::on_ifBlockButton_clicked()
 {
-    IfBlock *ifBlock = new IfBlock(sceneCenterX, sceneCenterY);
-    myScene->addItem(ifBlock);
-    shapeContainer->addElement(ifBlock);
+    InputIfDialog *dialog = new InputIfDialog();
+    dialog->show();
 
-    connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
-    connect(ifBlock, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
-    connect(ifBlock,SIGNAL(shapeMoved()),this,SLOT(repain()));
+    if(dialog->exec())
+    {
+        std::string name;
+
+        dialog->getInputData(name);
+
+        IfBlock *ifBlock = new IfBlock(sceneCenterX, sceneCenterY);
+
+        ifBlock->setInformation(name);
+
+        myScene->addItem(ifBlock);
+        shapeContainer->addElement(ifBlock);
+
+        connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
+        connect(ifBlock, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
+        connect(ifBlock,SIGNAL(shapeMoved()),this,SLOT(repain()));
+    }
 }
 
 void CreateDiagramForm::on_endBlockButton_clicked()

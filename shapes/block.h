@@ -14,6 +14,11 @@ public:
     QPoint getLeftPoint();
 
     QPoint getOutPoint();
+
+    void setText(std::string text);
+
+private:
+    std::string text = "";
 };
 
 #endif // Block_H
