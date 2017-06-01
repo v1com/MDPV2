@@ -19,6 +19,8 @@ public:
     void updateFrom(QPoint fromPoint);
     void updateTo(QPoint toPoint);
 
+    void drawTriangle();
+
 private:
     QPoint from;
     QPoint to;

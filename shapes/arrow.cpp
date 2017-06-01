@@ -38,9 +38,7 @@ Arrow::Arrow(QPoint fromPoint, QPoint toPoint, ArrowDirection arrowDirection) {
             break;
     }
 
-    points[0] = to;
-    points[1] = QPoint(to.x() - 5, to.y() - 5);
-    points[2] = QPoint(to.x() + 5, to.y() - 5);
+    drawTriangle();
 }
 
 Arrow::Arrow(Shape *fromShape, Shape *toShape){
@@ -129,9 +127,7 @@ Arrow::Arrow(Shape *fromShape, Shape *toShape){
         lines.push_back(QLine(QPoint(to.x(), to.y() - dist), to));
     }
 
-    points[0] = to;
-    points[1] = QPoint(to.x() - 5, to.y() - 5);
-    points[2] = QPoint(to.x() + 5, to.y() - 5);
+    drawTriangle();
 }
 
 void Arrow::updateFrom(QPoint fromPoint) {
@@ -140,6 +136,13 @@ void Arrow::updateFrom(QPoint fromPoint) {
 
 void Arrow::updateTo(QPoint toPoint) {
     to = toPoint;
+}
+
+void Arrow::drawTriangle()
+{
+    points[0] = to;
+    points[1] = QPoint(to.x() - 5, to.y() - 5);
+    points[2] = QPoint(to.x() + 5, to.y() - 5);
 }
 
 QPoint Arrow::getFrom() {
