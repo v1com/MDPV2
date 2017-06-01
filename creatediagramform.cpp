@@ -94,22 +94,21 @@ void CreateDiagramForm::on_startBlockButton_clicked()
 
      connect(entrance, SIGNAL(addArrowSignal(Shape*)), this, SLOT(setArrowFrom(Shape*)));
      connect(entrance, SIGNAL(mouseClicked(Shape*)), this, SLOT(addArrow(Shape*)));
-     connect(entrance,SIGNAL(shapeMoved()),this,SLOT(repain()));
+     connect(entrance,SIGNAL(shapeMoved()), this, SLOT(repain()));
 }
 
 void CreateDiagramForm::on_clearSceneButton_clicked()
 {
     QList<QGraphicsItem*> items = myScene->items();
-    for(int i=0;i<items.size();i++){
+    for(int i = 0; i < items.size(); i++){
         myScene->removeItem(items[i]);
     }
-    myScene->update();
+    myScene->clear();
     shapeContainer = new Diagram<Shape>;
 }
 
 void CreateDiagramForm::addArrow(Shape *to)
 {
-    qDebug("safafafaffas");
     if (arrowFrom) {
         Arrow *arrow = new Arrow(arrowFrom, to);
         myScene->addItem(arrow);
@@ -126,13 +125,7 @@ void CreateDiagramForm::setArrowFrom(Shape *from)
     this->arrowFrom = from;
 }
 
-
-
 void CreateDiagramForm::repain() {
-    QList<QGraphicsItem*> sceneItems = myScene->items();
-    for(int i=0;i<sceneItems.size();i++){
-        qDebug() << sceneItems[i];
-    }
     clearArrows();
     vector<list<Shape*>> v =  shapeContainer->getVector();
         for (int i = 0; i < v.size(); i++){
@@ -140,7 +133,8 @@ void CreateDiagramForm::repain() {
             list<Shape*>::iterator endIter = v[i].end();
 
             Shape *shape = *Iter;
-            myScene->addItem(shape);
+            if(!myScene->items().contains(shape)) myScene->addItem(shape);
+
              while (Iter != endIter){
                 ++Iter;
                 if (Iter != endIter){
@@ -179,7 +173,7 @@ void CreateDiagramForm::initDiargamOnScene(Diagram<Shape> *)
 
 void CreateDiagramForm::clearArrows()
 {
-    for(int i=0;i<arrows.size();i++){
+    for(int i = 0; i < arrows.size(); i++){
         myScene->removeItem(arrows[i]);
     }
     arrows.clear();
@@ -195,7 +189,7 @@ void CreateDiagramForm::on_saveButton_clicked()
 void CreateDiagramForm::on_loadButton_clicked()
 {
     MySerialization *qt = new MySerialization;
-    qt->loadFromFile(shapeContainer);
+    qt->loadFromFile(shapeContainer, this);
     repain();
     QMessageBox::warning(this,"Success","Loaded scene from file");
 }

@@ -16,10 +16,11 @@
 MySerialization::MySerialization()
 {
     fileName = QDir::currentPath().append("/savedStructure.txt");
+    qDebug(fileName.toLatin1());
 }
 
 void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
-    qDebug(fileName.toLatin1());
+
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly)) {
         qDebug("cant open");
@@ -49,7 +50,6 @@ void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
         ++Iter;
         while (Iter != endIter) {
             Shape *shape = *Iter;
-            qDebug() << shape->getUnicNumber();
             out << shape->getUnicNumber();
             ++Iter;
         }
@@ -58,8 +58,7 @@ void MySerialization::saveToFile(Diagram<Shape> *shapeContainer) {
     file.close();
 }
 
-void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer) {
-    qDebug(fileName.toLatin1());
+void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer, CreateDiagramForm *scene) {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug("cant open");
@@ -94,7 +93,7 @@ void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer) {
         SSList->append(ss);
     }
 
-    parser(shapeContainer, SSList);
+    parser(shapeContainer, SSList, scene);
 
     vector<list<Shape*>> vec =  shapeContainer->getVector();
 
@@ -112,37 +111,57 @@ void MySerialization::loadFromFile(Diagram<Shape> *shapeContainer) {
     file.close();
 }
 
-void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShape*> *SSList) {
+void MySerialization::parser(Diagram<Shape> *shapeContainer, QList<SerializeShape*> *SSList, CreateDiagramForm *scene) {
 
     for(SerializeShape *sshape : *SSList) {
         if(sshape->shapeType == BlockType) {
             Block *block = new Block(sshape->x, sshape->y, sshape->w, sshape->h);
             block->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(block);
+
+            connect(block, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
+            connect(block, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
+            connect(block, SIGNAL(shapeMoved()), scene, SLOT(repain()));
         }
 
         if(sshape->shapeType == IfBlockType) {
             IfBlock *ifBlock = new IfBlock(sshape->x, sshape->y);
             ifBlock->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(ifBlock);
+
+            connect(ifBlock, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
+            connect(ifBlock, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
+            connect(ifBlock, SIGNAL(shapeMoved()), scene, SLOT(repain()));
         }
 
         if(sshape->shapeType == BarType) {
             Bar *bar = new Bar(sshape->x, sshape->y);
             bar->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(bar);
+
+            connect(bar, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
+            connect(bar, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
+            connect(bar, SIGNAL(shapeMoved()), scene, SLOT(repain()));
         }
 
         if(sshape->shapeType == ExitType) {
             Exit *exit = new Exit(sshape->x, sshape->y);
             exit->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(exit);
+
+            connect(exit, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
+            connect(exit, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
+            connect(exit, SIGNAL(shapeMoved()), scene, SLOT(repain()));
         }
 
         if(sshape->shapeType == EntranceType) {
             Entrance *entrance = new Entrance(sshape->x, sshape->y);
             entrance->setUnicNumber(sshape->unicNumber);
             shapeContainer->addElement(entrance);
+
+            connect(entrance, SIGNAL(addArrowSignal(Shape*)), scene, SLOT(setArrowFrom(Shape*)));
+            connect(entrance, SIGNAL(mouseClicked(Shape*)), scene, SLOT(addArrow(Shape*)));
+            connect(entrance, SIGNAL(shapeMoved()), scene, SLOT(repain()));
         }
     }
 }
