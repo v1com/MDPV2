@@ -223,20 +223,32 @@ void CreateDiagramForm::on_loadButton_clicked()
     repain();
     QMessageBox::warning(this,"Success","Loaded scene from file");
 }
-void CreateDiagramForm::recur(Shape* s){
+
+Shape* CreateDiagramForm::recur(Shape* s) {
 
     if (s->getType() == ExitType)
-        return;
+        return s;
 
     vector<list<Shape*>> v =  shapeContainer->getVector();
 
     for (int i = 0; i < v.size(); i++){
         Shape* tmp = v[i].front();
-        if (tmp == s){
+        if (tmp == s) {
            list<Shape*>::iterator Iter = v[i].begin();
            ++Iter;
-           //some code here
-           recur(*Iter);
+           Shape* tmp = *Iter;
+           tmp->setCost(tmp->getCost() + recur(*Iter)->getCost());
+        }
+    }
+}
+
+Shape* CreateDiagramForm::returnStartBlock() {
+    vector<list<Shape*>> v =  shapeContainer->getVector();
+
+    for (int i = 0; i < v.size(); i++){
+        Shape* tmp = v[i].front();
+        if (tmp->getType() == EntranceType) {
+            return tmp;
         }
     }
 }
