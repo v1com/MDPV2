@@ -4,6 +4,7 @@
 #
 #-------------------------------------------------
 
+QT       += testlib
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -35,7 +36,8 @@ SOURCES += main.cpp\
     scene.cpp \
     creatediagramform.cpp \
     qtserialization.cpp \
-    serializeshape.cpp
+    serializeshape.cpp \
+    shapetests/block_test.cpp
 
 HEADERS  += maindialog.h \
     allocator/allocator.h \
@@ -52,7 +54,8 @@ HEADERS  += maindialog.h \
     creatediagramform.h \
     shapes/arrowdirection.h \
     qtserialization.h \
-    serializeshape.h
+    serializeshape.h \
+    shapetests/block_test.h
 
 FORMS    += maindialog.ui \
     creatediagramform.ui
